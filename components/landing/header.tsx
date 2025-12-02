@@ -2,10 +2,16 @@
 
 import Link from 'next/link'
 import { ShimmerButton } from '@/components/ui/shimmer-button'
+import { motion } from 'framer-motion'
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-sticky bg-white/80 backdrop-blur-md border-b border-border">
+    <motion.header 
+      className="sticky top-0 z-sticky bg-white/70 backdrop-blur-xl border-b border-neutral-200/50 shadow-sm"
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.2, 0.8, 0.2, 1] }}
+    >
       <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
@@ -53,7 +59,8 @@ export function Header() {
           </ShimmerButton>
         </div>
       </nav>
-    </header>
+    </motion.header>
   )
 }
+
 

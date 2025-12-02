@@ -1,6 +1,8 @@
 'use client'
 
 import { Brain, Zap, Target, Database, Palette, Lock } from 'lucide-react'
+import { BentoGrid, BentoCard } from '@/components/ui/bento-grid'
+import { DotPattern } from '@/components/ui/dot-pattern'
 
 export function Features() {
   const features = [
@@ -49,33 +51,35 @@ export function Features() {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <BentoGrid className="max-w-6xl mx-auto">
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (
-              <div
+              <BentoCard
                 key={index}
-                className={`rounded-xl border-2 border-neutral-200 bg-white p-8 shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 ${
-                  feature.featured ? 'md:col-span-2 lg:col-span-3 bg-gradient-to-br from-primary/5 to-transparent' : ''
-                }`}
-              >
-                <div className="space-y-4">
-                  <div className="bg-primary/10 w-fit p-3 rounded-lg">
-                    <Icon className="h-8 w-8 text-primary" strokeWidth={2} />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold leading-snug mb-2">{feature.name}</h3>
-                    <p className="text-base leading-normal text-muted-foreground">
-                      {feature.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
+                name={feature.name}
+                className={feature.featured ? 'col-span-3' : 'col-span-3 md:col-span-1'}
+                Icon={Icon}
+                description={feature.description}
+                href="#"
+                cta="Learn more"
+                background={
+                  <DotPattern
+                    className="absolute inset-0 opacity-30"
+                    width={16}
+                    height={16}
+                    cx={1}
+                    cy={1}
+                    cr={1}
+                  />
+                }
+              />
             )
           })}
-        </div>
+        </BentoGrid>
       </div>
     </section>
   )
 }
+
 

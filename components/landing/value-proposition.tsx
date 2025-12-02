@@ -1,12 +1,35 @@
 'use client'
 
+import { useRef } from 'react'
+import { MagicCard } from '@/components/ui/magic-card'
+import { AnimatedBeam } from '@/components/ui/animated-beam'
+import { motion } from 'framer-motion'
+
 export function ValueProposition() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const problemRef = useRef<HTMLDivElement>(null)
+  const benefitRef = useRef<HTMLDivElement>(null)
+  const payoffRef = useRef<HTMLDivElement>(null)
+  
   return (
     <section className="py-20 bg-gradient-to-b from-background to-accent-light/20">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div className="container mx-auto px-4" ref={containerRef}>
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto relative">
           {/* Problem Card */}
-          <div className="rounded-xl border-2 border-neutral-200 bg-white p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <motion.div
+            ref={problemRef}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <MagicCard
+              gradientColor="#262626"
+              gradientFrom="#EF4444"
+              gradientTo="#7A4E9E"
+              gradientOpacity={0.2}
+              className="p-8 h-full"
+            >
             <div className="space-y-4">
               <div className="text-danger text-sm font-semibold tracking-wide">PROBLEM</div>
               <h3 className="text-xl font-bold leading-snug">AI Regression Loops</h3>
@@ -15,15 +38,35 @@ export function ValueProposition() {
                 Your AI assistant oscillates between three different approaches to the same problem.
               </p>
             </div>
-          </div>
+            </MagicCard>
+          </motion.div>
           
-          {/* Arrow */}
-          <div className="hidden md:flex items-center justify-center">
-            <div className="text-primary text-4xl font-bold">→</div>
-          </div>
+          {/* Animated Beam */}
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={problemRef}
+            toRef={benefitRef}
+            gradientStartColor="#7A4E9E"
+            gradientStopColor="#F0C49B"
+            curvature={0}
+            duration={3}
+          />
           
           {/* Benefit Card */}
-          <div className="rounded-xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <motion.div
+            ref={benefitRef}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <MagicCard
+              gradientColor="#262626"
+              gradientFrom="#7A4E9E"
+              gradientTo="#B47EC8"
+              gradientOpacity={0.3}
+              className="p-8 h-full"
+            >
             <div className="space-y-4">
               <div className="text-primary text-sm font-semibold tracking-wide">BENEFIT</div>
               <h3 className="text-xl font-bold leading-snug">Automatic Evaluation</h3>
@@ -32,27 +75,50 @@ export function ValueProposition() {
                 violates your style guide, or contradicts previous decisions.
               </p>
             </div>
-          </div>
+            </MagicCard>
+          </motion.div>
           
-          {/* Arrow */}
-          <div className="hidden md:flex items-center justify-center md:col-span-3 -my-8">
-            <div className="text-primary text-4xl font-bold">↓</div>
-          </div>
+          <AnimatedBeam
+            containerRef={containerRef}
+            fromRef={benefitRef}
+            toRef={payoffRef}
+            gradientStartColor="#B47EC8"
+            gradientStopColor="#F0C49B"
+            curvature={0}
+            duration={3}
+            delay={0.5}
+          />
           
           {/* Emotional Payoff Card */}
-          <div className="md:col-span-3 rounded-xl border-2 border-accent/40 bg-gradient-to-br from-accent-light/50 to-transparent p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <motion.div
+            ref={payoffRef}
+            className="md:col-span-3"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <MagicCard
+              gradientColor="#262626"
+              gradientFrom="#F0C49B"
+              gradientTo="#F8E1C2"
+              gradientOpacity={0.4}
+              className="p-8 h-full"
+            >
             <div className="space-y-4 max-w-2xl mx-auto text-center">
               <div className="text-accent text-sm font-semibold tracking-wide">OUTCOME</div>
               <h3 className="text-2xl font-bold leading-snug">Ship With Confidence</h3>
               <p className="text-muted-foreground leading-relaxed text-lg">
                 Trust your AI assistant again. Ship faster without constant vigilance. 
-                Stop feeling like you're fighting your tools.
+                Stop feeling like you&apos;re fighting your tools.
               </p>
             </div>
-          </div>
+            </MagicCard>
+          </motion.div>
         </div>
       </div>
     </section>
   )
 }
+
 

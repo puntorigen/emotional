@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Zap, Cpu, Shield, Lock } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export function FAQ() {
   const faqs = [
@@ -45,15 +46,26 @@ export function FAQ() {
             </p>
           </div>
           
-          <div className="rounded-xl border-2 border-neutral-200 bg-white p-6 shadow-lg">
+          <motion.div 
+            className="rounded-xl border-2 border-neutral-200 bg-white/80 backdrop-blur-sm p-6 shadow-lg"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <Accordion type="single" collapsible className="space-y-4">
               {faqs.map((faq, index) => {
                 const Icon = faq.icon
                 return (
                   <AccordionItem key={index} value={`item-${index}`} className="border-b-0">
-                    <AccordionTrigger className="text-left hover:no-underline">
+                    <AccordionTrigger className="text-left hover:no-underline hover:text-primary transition-colors">
                       <div className="flex items-center gap-3">
-                        <Icon className="h-5 w-5 text-primary shrink-0" strokeWidth={2} />
+                        <motion.div
+                          whileHover={{ scale: 1.2, rotate: 360 }}
+                          transition={{ duration: 0.4 }}
+                        >
+                          <Icon className="h-5 w-5 text-primary shrink-0" strokeWidth={2} />
+                        </motion.div>
                         <span className="font-semibold">{faq.question}</span>
                       </div>
                     </AccordionTrigger>
@@ -64,7 +76,7 @@ export function FAQ() {
                 )
               })}
             </Accordion>
-          </div>
+          </motion.div>
           
           {/* Trust Badges */}
           <div className="mt-12 flex flex-wrap justify-center items-center gap-8 text-sm text-muted-foreground">
@@ -86,4 +98,5 @@ export function FAQ() {
     </section>
   )
 }
+
 

@@ -2,6 +2,7 @@
 
 import { ShimmerButton } from '@/components/ui/shimmer-button'
 import { Code, Zap, Target, CheckCircle } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export function HowItWorks() {
   const steps = [
@@ -42,10 +43,16 @@ export function HowItWorks() {
           </div>
           
           {/* Code Example */}
-          <div className="rounded-xl border-2 border-neutral-200 bg-neutral-900 p-6 shadow-lg overflow-hidden">
+          <motion.div 
+            className="rounded-xl border-2 border-neutral-200 bg-neutral-900 p-6 shadow-2xl overflow-hidden hover:shadow-[0_20px_70px_-10px_rgba(122,78,158,0.5)] transition-all duration-500"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-neutral-700">
               <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
+                <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500" />
                 <div className="w-3 h-3 rounded-full bg-green-500" />
               </div>
@@ -64,18 +71,30 @@ export function HowItWorks() {
   }
 }`}</code>
             </pre>
-          </div>
+          </motion.div>
           
           {/* Steps */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((step, index) => {
               const Icon = step.icon
               return (
-                <div key={index} className="space-y-4">
+                <motion.div 
+                  key={index} 
+                  className="space-y-4 p-6 rounded-xl bg-white/50 backdrop-blur-sm border border-neutral-200 hover:border-primary/50 hover:bg-white/80 transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                >
                   <div className="flex items-center gap-3">
-                    <div className="bg-primary/10 p-3 rounded-lg">
+                    <motion.div 
+                      className="bg-primary/10 p-3 rounded-lg"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                    >
                       <Icon className="h-6 w-6 text-primary" strokeWidth={2} />
-                    </div>
+                    </motion.div>
                     <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
                       {index + 1}
                     </div>
@@ -86,7 +105,7 @@ export function HowItWorks() {
                       {step.description}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               )
             })}
           </div>
@@ -106,4 +125,5 @@ export function HowItWorks() {
     </section>
   )
 }
+
 

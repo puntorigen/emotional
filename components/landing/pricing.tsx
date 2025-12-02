@@ -4,6 +4,8 @@ import { ShimmerButton } from '@/components/ui/shimmer-button'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Check } from 'lucide-react'
+import { MagicCard } from '@/components/ui/magic-card'
+import { motion } from 'framer-motion'
 
 export function Pricing() {
   return (
@@ -20,8 +22,20 @@ export function Pricing() {
         
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Free Tier */}
-          <div className="rounded-xl border-2 border-neutral-200 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <div className="p-8 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <MagicCard
+              gradientColor="#262626"
+              gradientFrom="#7A4E9E"
+              gradientTo="#F0C49B"
+              gradientOpacity={0.2}
+              className="p-8"
+            >
+              <div className="space-y-6">
               <div>
                 <h3 className="text-2xl font-bold">Free</h3>
                 <div className="mt-4">
@@ -57,19 +71,36 @@ export function Pricing() {
               >
                 Start Free
               </Button>
-            </div>
-          </div>
+              </div>
+            </MagicCard>
+          </motion.div>
           
           {/* Pro Tier (Recommended) */}
-          <div className="relative">
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-              <Badge className="bg-primary px-4 py-1 text-white">
+          <motion.div 
+            className="relative"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <motion.div 
+              className="absolute -top-4 left-1/2 -translate-x-1/2 z-10"
+              animate={{ y: [0, -5, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Badge className="bg-primary px-4 py-1 text-white shadow-lg">
                 Best for AI-heavy workflows
               </Badge>
-            </div>
+            </motion.div>
             
-            <div className="rounded-xl border-2 border-primary bg-white shadow-xl hover:shadow-2xl transition-shadow duration-300">
-              <div className="p-8 space-y-6">
+            <MagicCard
+              gradientColor="#262626"
+              gradientFrom="#7A4E9E"
+              gradientTo="#F0C49B"
+              gradientOpacity={0.4}
+              className="p-8 border-2 border-primary/30"
+            >
+              <div className="space-y-6">
                 <div>
                   <h3 className="text-2xl font-bold">Pro</h3>
                   <div className="mt-4 flex items-baseline gap-2">
@@ -120,18 +151,19 @@ export function Pricing() {
                   No credit card required • Cancel anytime
                 </p>
               </div>
-            </div>
-          </div>
+            </MagicCard>
+          </motion.div>
         </div>
         
         {/* ROI Calculator Link */}
         <div className="text-center mt-12">
           <Button variant="link" className="text-lg text-primary hover:text-primary-hover">
-            Calculate Your Team's ROI →
+            Calculate Your Team&apos;s ROI →
           </Button>
         </div>
       </div>
     </section>
   )
 }
+
 

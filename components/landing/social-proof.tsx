@@ -1,6 +1,8 @@
 'use client'
 
 import { Card } from '@/components/ui/card'
+import { NumberTicker } from '@/components/ui/number-ticker'
+import { motion } from 'framer-motion'
 
 export function SocialProof() {
   const metrics = [
@@ -47,26 +49,71 @@ export function SocialProof() {
             <h3 className="text-2xl font-bold">By The Numbers</h3>
             
             <div className="space-y-6">
-              {metrics.map((metric, index) => (
-                <div key={index} className="flex items-center gap-6">
-                  <div className="text-6xl font-bold text-primary">
-                    {metric.value}
-                  </div>
-                  <div>
-                    <div className="font-semibold text-lg">{metric.label}</div>
-                    <div className="text-sm text-muted-foreground">{metric.sublabel}</div>
-                  </div>
+              <motion.div
+                className="flex items-center gap-6"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="text-6xl font-bold text-primary flex items-baseline">
+                  <NumberTicker value={15} />
+                  <span>+</span>
                 </div>
-              ))}
+                <div>
+                  <div className="font-semibold text-lg">hours saved</div>
+                  <div className="text-sm text-muted-foreground">per team weekly</div>
+                </div>
+              </motion.div>
               
-              <div className="pt-4">
+              <motion.div
+                className="flex items-center gap-6"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <div className="text-6xl font-bold text-primary flex items-baseline">
+                  <NumberTicker value={60} />
+                  <span>%</span>
+                </div>
+                <div>
+                  <div className="font-semibold text-lg">reduction</div>
+                  <div className="text-sm text-muted-foreground">in review cycle time</div>
+                </div>
+              </motion.div>
+              
+              <motion.div
+                className="flex items-center gap-6"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <div className="text-6xl font-bold text-primary flex items-baseline">
+                  <NumberTicker value={85} />
+                  <span>%</span>
+                </div>
+                <div>
+                  <div className="font-semibold text-lg">of issues</div>
+                  <div className="text-sm text-muted-foreground">caught automatically</div>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                className="pt-4"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
                 <div className="text-2xl font-bold text-neutral-800">
                   $30-50K
                 </div>
                 <div className="text-sm text-muted-foreground">
                   annual savings per 10-person team
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
           
@@ -75,18 +122,26 @@ export function SocialProof() {
             <h3 className="text-2xl font-bold">What Managers Say</h3>
             
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <blockquote className="text-lg leading-relaxed mb-4">
-                  "{testimonial.quote}"
-                </blockquote>
-                <div className="flex items-center gap-3 pt-4 border-t">
-                  <div className="h-12 w-12 rounded-full bg-primary/20 shrink-0" />
-                  <div>
-                    <div className="font-semibold text-sm">{testimonial.author}</div>
-                    <div className="text-xs text-muted-foreground">{testimonial.company}</div>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.2 }}
+              >
+                <Card className="p-6 shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-neutral-200 hover:border-primary/30">
+                  <blockquote className="text-lg leading-relaxed mb-4">
+                    &ldquo;{testimonial.quote}&rdquo;
+                  </blockquote>
+                  <div className="flex items-center gap-3 pt-4 border-t">
+                    <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-secondary shrink-0" />
+                    <div>
+                      <div className="font-semibold text-sm">{testimonial.author}</div>
+                      <div className="text-xs text-muted-foreground">{testimonial.company}</div>
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -94,4 +149,5 @@ export function SocialProof() {
     </section>
   )
 }
+
 

@@ -2,17 +2,34 @@
 
 import { ShimmerButton } from '@/components/ui/shimmer-button'
 import { Button } from '@/components/ui/button'
+import { Ripple } from '@/components/ui/ripple'
+import { RetroGrid } from '@/components/ui/retro-grid'
+import { motion } from 'framer-motion'
 
 export function FinalCTA() {
   return (
     <section className="relative py-24 bg-gradient-to-br from-primary via-secondary to-primary overflow-hidden">
-      {/* Ripple effect placeholder - will be enhanced with MagicUI */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.8),transparent_50%)]" />
-      </div>
+      {/* Animated ripple effect */}
+      <Ripple 
+        mainCircleSize={200}
+        mainCircleOpacity={0.15}
+        numCircles={8}
+      />
+      
+      {/* Retro grid background for dynamic effect */}
+      <RetroGrid 
+        className="opacity-10"
+        angle={65}
+      />
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+        <motion.div 
+          className="max-w-4xl mx-auto text-center space-y-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
           <h2 className="text-4xl sm:text-5xl font-bold text-white leading-tight">
             Your Team Moved Fast With AI.{' '}
             <span className="text-accent">Now Move Fast AND Clean.</span>
@@ -23,12 +40,17 @@ export function FinalCTA() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-            <Button
-              size="lg"
-              className="bg-white text-primary hover:bg-white/90 min-h-[56px] px-10 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-200"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Stop AI Regression Loops
-            </Button>
+              <Button
+                size="lg"
+                className="bg-white text-primary hover:bg-white/90 min-h-[56px] px-10 text-lg font-semibold shadow-xl hover:shadow-2xl transition-all duration-200"
+              >
+                Stop AI Regression Loops
+              </Button>
+            </motion.div>
             
             <Button 
               variant="outline" 
@@ -44,7 +66,7 @@ export function FinalCTA() {
               Used by 200+ AI-first dev teams • 5-min setup • No credit card
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
