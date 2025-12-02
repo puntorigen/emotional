@@ -1,0 +1,21 @@
+# Emotional.tools Brand Guidelines
+
+## Product Vision
+Emotional Tools is a lightweight emotional reasoning service for Large Language Models. It exposes an MCP-compatible HTTP endpoint that any LLM client can call to evaluate its own responses before sending them to a user.
+
+This system acts as an external emotional processor—a synthetic limbic system—for improving decision‑making, coherence, and alignment with user preferences. It works across domains
+
+## Color Palette
+#7A4E9E
+#B47EC8
+#F0C49B
+#F8E1C2
+
+## Theme Colors
+- Primary: #7A4E9E
+- Secondary: #B47EC8
+- Accent: #F0C49B
+
+## Typography
+- Primary (Headings): Inter (700)
+- Secondary (Body): Open Sans (400)
